@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="A simple paycheck calculator for estimating weekly take-home pay." />
+    <title>Paycheck Calculator</title>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%230f7b4e'/%3E%3Ctext x='32' y='43' text-anchor='middle' font-family='Arial' font-size='36' font-weight='bold' fill='white'%3E%24%3C/text%3E%3C/svg%3E" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <main class="page-shell">
+      <section class="hero" aria-labelledby="page-title">
+        <div class="brand-mark" aria-hidden="true">$</div>
+        <p class="eyebrow">Your weekly estimate</p>
+        <h1 id="page-title">Paycheck calculator</h1>
+        <p class="hero-copy">See a clear estimate of what you might take home after taxes.</p>
+      </section>
+
+      <section class="calculator-card" aria-label="Paycheck calculator">
+        <form id="calculator-form" novalidate>
+          <div class="form-grid">
+            <div class="field">
+              <label for="hours">Hours worked</label>
+              <div class="input-wrap">
+                <input id="hours" name="hours" type="number" inputmode="decimal" min="0" max="168" step="0.25" placeholder="40" required />
+                <span aria-hidden="true">hrs</span>
+              </div>
+              <p class="field-hint" id="hours-hint">Up to 168 hours per week</p>
+            </div>
+
+            <div class="field">
+              <label for="hourly-rate">Hourly pay rate</label>
+              <div class="input-wrap">
+                <span aria-hidden="true">$</span>
+                <input id="hourly-rate" name="hourlyRate" type="number" inputmode="decimal" min="0" max="1000000" step="0.01" placeholder="25.00" required />
+              </div>
+              <p class="field-hint">Your gross pay rate before taxes</p>
+            </div>
+          </div>
+
+          <p class="form-error" id="form-error" role="alert" aria-live="polite"></p>
+          <button class="calculate-button" type="submit">
+            <span>Calculate my paycheck</span>
+            <span class="button-arrow" aria-hidden="true">→</span>
+          </button>
+        </form>
+
+        <section class="results" id="results" aria-live="polite" aria-labelledby="results-title" hidden>
+          <div class="results-heading">
+            <div>
+              <p class="eyebrow">Estimated weekly take-home</p>
+              <h2 id="results-title">$<span id="net-pay">0.00</span></h2>
+            </div>
+            <div class="result-badge" aria-hidden="true">15% tax estimate</div>
+          </div>
+          <div class="breakdown">
+            <div class="breakdown-row">
+              <span>Gross pay</span>
+              <strong id="gross-pay">$0.00</strong>
+            </div>
+            <div class="breakdown-row">
+              <span>Estimated taxes</span>
+              <strong id="taxes">$0.00</strong>
+            </div>
+            <div class="breakdown-row total-row">
+              <span>Estimated take-home</span>
+              <strong id="take-home">$0.00</strong>
+            </div>
+          </div>
+        </section>
+      </section>
+
+      <p class="disclaimer"><span aria-hidden="true">ⓘ</span> This is an estimate using a flat 15% tax rate. Your actual paycheck may vary based on taxes, deductions, and benefits.</p>
+    </main>
+    <script src="/script.js"></script>
+  </body>
+</html>

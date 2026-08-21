@@ -3,5 +3,36 @@ modules = ["java-graalvm22.3"]
 [nix]
 channel = "stable-25_05"
 
+[deployment]
+run = ["sh", "-c", "mkdir -p .build && javac -d .build SalaryCalculatorServer.java && java -cp .build SalaryCalculatorServer"]
+
 [agent]
 expertMode = true
+
+[workflows]
+runButton = "Project"
+
+[[workflows.workflow]]
+name = "Project"
+mode = "parallel"
+author = "agent"
+
+[[workflows.workflow.tasks]]
+task = "workflow.run"
+args = "Start application"
+
+[[workflows.workflow]]
+name = "Start application"
+author = "agent"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "mkdir -p .build && javac -d .build SalaryCalculatorServer.java && java -cp .build SalaryCalculatorServer"
+waitForPort = 5000
+
+[workflows.workflow.metadata]
+outputType = "webview"
+
+[[ports]]
+localPort = 5000
+externalPort = 80
